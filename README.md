@@ -1,55 +1,77 @@
-# ing-sw-2023-Ratti-Rivitti-Salvatore-Sanduleanu
-Prova finale di Ingegneria del Software Polimi AA 2022/2023
+# My Shelfie - Digital Edition
 
-![MyShelfie](https://www.craniocreations.it/storage/media/products/54/112/My_Shelfie_box_ITA-ENG.png)
+![My Shelfie Board Game Box](https://www.craniocreations.it/storage/media/products/54/112/My_Shelfie_box_ITA-ENG.png)
 
-## SERVER
+This project is a digital adaptation of the board game "My Shelfie" by Cranio Creations, developed as the final project for the Software Engineering course at Politecnico di Milano (A.Y. 2022/2023). It's a multiplayer game that supports network play through both RMI and Socket protocols, featuring both a Command-Line Interface (CLI) and a Graphical User Interface (GUI).
 
+## ✨ Features
+
+- **Complete Rule Set:** Implements all the core rules of the "My Shelfie" board game.
+- **Multiple Interfaces:** Play using either a rich Graphical User Interface (GUI) built with JavaFX or a classic Command-Line Interface (CLI).
+- **Network Play:** Supports multiplayer games over the network using two different protocols:
+    - **RMI** (Remote Method Invocation)
+    - **Socket** communication
+- **Resilience to Disconnections:** Players who get disconnected due to network issues or client crashes can reconnect to the ongoing game. The game proceeds by skipping the disconnected player's turns, and if only one player remains, the game pauses until another player reconnects or a timeout is reached.
+- **In-Game Chat:** A full-featured chat allows players to communicate during the game. Messages can be sent to everyone or privately to a specific player.
+
+## 🚀 How to Run
+
+### Prerequisites
+- Java Development Kit (JDK) 19 or later.
+
+### Download
+You can download the executable JAR file, which includes all dependencies, from the [GitHub Releases page](https://github.com/rivitti01/ing-sw-2023-ratti-rivitti-salvatore-sanduleanu/releases/download/MyShelfie/softeng-gc30-1.0-SNAPSHOT-jar-with-dependencies.jar).
+
+### 1. Running the Server
+The server must be started first to allow clients to connect. Open your terminal and run the following command:
+
+```bash
+java -jar [jar_file_name].jar [ipAddress] [socketPort] [rmiPort]
 ```
-java -jar softeng-gc30-1.0-SNAPSHOT-jar-with-dependencies [ipAddress] [socketPort] [rmiPort]
-```
-Esempio
-```
-java -jar softeng-gc30-1.0-SNAPSHOT-jar-with-dependencies 192.168.1.50 2000 2099
-```
+- `[jar_file_name].jar`: The name of the downloaded JAR file (e.g., `softeng-gc30-1.0-SNAPSHOT-jar-with-dependencies.jar`).
+- `[ipAddress]`: The IP address the server will bind to. Use your machine's local network IP to allow others on the same network to connect.
+- `[socketPort]`: The TCP port for Socket connections.
+- `[rmiPort]`: The port for RMI connections.
 
-
-## CLIENT
-
-```
-java -jar softeng-gc30-1.0-SNAPSHOT-jar-with-dependencies [G/T] [R/S] [ipAddress] [socketPort] [rmiPort]
+**Example:**
+```bash
+java -jar softeng-gc30-1.0-SNAPSHOT.jar 192.168.1.10 2000 1099
 ```
 
-Esempio con interfaccia grafica e protocollo socket
+### 2. Running the Client
+Once the server is running, players can join by launching the client.
+
+```bash
+java -jar [jar_file_name].jar [UI_Type] [Network_Type] [ipAddress] [socketPort] [rmiPort]
 ```
-java -jar softeng-gc30-1.0-SNAPSHOT-jar-with-dependencies G S 192.168.1.50 2000 2099
+- `[UI_Type]`: Choose the user interface.
+    - `G`: Graphical User Interface (GUI)
+    - `T`: Text-based/Command-Line Interface (CLI)
+- `[Network_Type]`: Choose the network protocol.
+    - `R`: RMI
+    - `S`: Socket
+- `[ipAddress]`: The IP address of the running server.
+- `[socketPort]`: The server's Socket port.
+- `[rmiPort]`: The server's RMI port.
+
+**Example (GUI with Socket):**
+```bash
+java -jar softeng-gc30-1.0-SNAPSHOT.jar G S 192.168.1.10 2000 1099
 ```
 
-### Jar
-IL Jar del progetto può essere scaricato al seguente link: [Jar](https://github.com/rivitti01/ing-sw-2023-ratti-rivitti-salvatore-sanduleanu/releases/download/MyShelfie/softeng-gc30-1.0-SNAPSHOT-jar-with-dependencies.jar).
+**Example (CLI with RMI):**
+```bash
+java -jar softeng-gc30-1.0-SNAPSHOT.jar T R 192.168.1.10 2000 1099```
 
+## 🧪 Testing
+The project includes a comprehensive suite of unit tests written with JUnit to ensure code quality and correctness. You can view the test coverage report [here](https://github.com/rivitti01/ing-sw-2023-ratti-rivitti-salvatore-sanduleanu/blob/main/documents/image.png).
 
+## ⚖️ Disclaimer
+My Shelfie is a board game developed and published by Cranio Creations Srl. The graphical content in this project that is attributable to the original board game is used with the approval of Cranio Creations Srl for educational purposes only. The distribution, copying, or reproduction of the content and images in any form outside of this project, as well as the redistribution and publication of the content and images for purposes other than the one mentioned above, is prohibited. Commercial use of said content is also forbidden.
 
-
-## Funzionalità
-### Funzionalità Sviluppate
-- Regole Complete
-- CLI
-- GUI
-- Socket
-- RMI
-- 2 FA (Funzionalità Avanzate):
-    - __Resilienza:__ I giocatori disconnessi a seguito della caduta della rete o del crash del client, possono ricollegarsi e continuare la partita. Mentre un giocatore non è collegato, il gioco continua saltando i turni di quel giocatore. Se rimane attivo un solo giocatore, il gioco viene sospeso fino a che non si ricollega almeno un altro giocatore oppure scade un timeout che decreta la vittoria dell'unico giocatore rimasto connesso.
-    - __Chat:__ Client e server devono offrire la possibilità ai giocatori coinvolti in una partita di chattare tra di loro, inviando messaggi (testuali) indirizzati a tutti i giocatori della partita o a un singolo giocatore.
-
-### Coverage report
-Al seguente link è possibile consultare il report della coverage dei test effettuati con Junit: [Report](https://github.com/rivitti01/ing-sw-2023-ratti-rivitti-salvatore-sanduleanu/blob/main/documents/image.png)
-
-## NOTA
-My Shelfie è un gioco da tavolo sviluppato ed edito da Cranio Creations Srl. I contenuti grafici di questo progetto riconducibili al prodotto editoriale da tavolo sono utilizzati previa approvazione di Cranio Creations Srl a solo scopo didattico. È vietata la distribuzione, la copia o la riproduzione dei contenuti e immagini in qualsiasi forma al di fuori del progetto, così come la redistribuzione e la pubblicazione dei contenuti e immagini a fini diversi da quello sopracitato. È inoltre vietato l'utilizzo commerciale di suddetti contenuti.
-
-## Componenti del gruppo
-- [__Leonardo Ratti__](https://github.com/LRatti)
-- [__Francesco Rivitti__](https://github.com/rivitti01)
-- [__Alessandro Salvatore__](https://github.com/SAAL01)
-- [__Denis Sanduleanu__](https://github.com/DenSandu)
+## 👥 Authors
+This project was developed by:
+- [**Leonardo Ratti**](https://github.com/LRatti)
+- [**Francesco Rivitti**](https://github.com/rivitti01)
+- [**Alessandro Salvatore**](https://github.com/SAAL01)
+- [**Denis Sanduleanu**](https://github.com/DenSandu)
